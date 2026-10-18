@@ -1,0 +1,26 @@
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    restart: unless-stopped
+    volumes:
+      - minio_data:/data
+    ports:
+      - "127.0.0.1:9000:9000"  # API portu
+      - "127.0.0.1:9001:9001"  # Konsol Web UI portu
+    env_file:
+      - .env
+    environment:
+      MINIO_ROOT_USER: "${MINIO_ROOT_USER}"
+      MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
+    command: server --console-address ":9001" /data
+    networks:
+      - app-network
+
+volumes:
+  minio_data:
+
+networks:
+  app-network:
+    external: true
+
