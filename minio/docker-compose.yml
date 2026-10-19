@@ -13,6 +13,7 @@ services:
     environment:
       MINIO_ROOT_USER: "${MINIO_ROOT_USER}"
       MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
+      MINIO_LICENSE: "${MINIO_LICENSE}"
     command: server --console-address ":9001" /data
     networks:
       - app-network
